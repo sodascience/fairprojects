@@ -1,14 +1,14 @@
+"""Module containing GitHubRepo data class and functions to perform api calls"""
 from dataclasses import dataclass
 from datetime import datetime
 import re
 from typing import Literal
 from base64 import b64decode
-from textstat import flesch_reading_ease as readability
+import textstat
 import httpx
 
 Severity = Literal["ok", "low", "high"]
 Criteria = tuple[str, Severity]
-
 
 @dataclass
 class GitHubRepo:
@@ -107,8 +107,7 @@ class GitHubRepo:
             license=response["license"]["name"] if response["license"] else None,
             updated=datetime.fromisoformat(response["updated_at"]),
             readme=readme_txt,
-            # TODO: strip markdown before computing readability
-            readability=readability(readme_txt) if readme_txt is not None else None,
+            readability=compute_readability(readme_txt) if readme_txt is not None else None,
         )
 
 
@@ -123,6 +122,10 @@ async def get_readme(full_name: str, token: str | None = None) -> str | None:
         readme_b64 = readme_response.json().get("content")
         return b64decode(readme_b64).decode()
 
+def compute_readability(readme_txt: str):
+    """Compute readability from readme markdown text."""
+    # TODO: strip markdown before computing readability
+    return textstat.textstat.flesch_reading_ease(readme_txt)
 
 async def get_org_repos(org: str, token: str | None = None) -> list[GitHubRepo]:
     """Get all the public repos for an organisation."""

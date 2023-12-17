@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "repo_dashboard"
+name = "fairprojects"
 version = "0.1.0"
 description = "Dashboard for tracking your organization's repo"
 authors = ["Erik-Jan van Kesteren <erikjanvankesteren@pm.me>", "Donatas Rasiukevičius <donatas@rasiukevicius.dev>"]

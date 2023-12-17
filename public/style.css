@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;600&family=Open+Sans:wght@300;400&display=swap");
+
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h3,
+h5 {
+    font-family: "Fira Sans", serif;
+    font-weight: 600;
+}
+
+h2,
+h4,
+h6 {
+    font-family: "Fira Sans", serif;
+}
+
+a {
+    text-decoration: none;
+    background: linear-gradient(to left, #FFCD00 50%, #000000 50%) right;
+    transition: 0.2s ease-out;
+    background-size: 200% 100%;
+    color: #000000;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-bottom: 1px solid #000000;
+}
+
+a:hover {
+    background-position: left;
+}
+
+a:hover {
+    color: #FFCD00;
+}
+
+.main-header {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    margin-bottom: 2em;
+}
+
+.main-header img {
+    height: 100px;
+}
+
+.main-header h1 {
+    font-size: 2em;
+}
+
+body {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.severity-high {
+    background-color: #C00A35;
+    color: white;
+}
+
+.severity-low {
+    background-color: #FFCD00;
+    color: black;
+}
+
+.severity-ok {
+    background-color: #24A793;
+    color: black;
+}

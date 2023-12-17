@@ -1,0 +1,16 @@
+# The name of the organisation
+organization = "sodascience"
+
+[page]
+title = "SoDa FAIR projects dashboard"
+header = "FAIR projects dashboard"
+
+[metrics]
+description  = true # Check that the repo has a description
+topics       = true # Check that the repo has keywords
+license      = true # Check that the repo has a license
+updated      = true # Display the last update
+readme       = true # Check that the repo has a readme
+readability  = true # Display the readability score for the readme
+sections     = ["Contact", "Contributing"] # Check that these sections exist
+

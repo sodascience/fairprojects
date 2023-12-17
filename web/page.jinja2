@@ -1,0 +1,30 @@
+{% import "macros.jinja2" as macros %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <link
+        href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.6/b-2.4.1/b-colvis-2.4.1/b-html5-2.4.1/b-print-2.4.1/fh-3.4.0/r-2.5.0/datatables.min.css"
+        rel="stylesheet">
+    <script
+        src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.6/b-2.4.1/b-colvis-2.4.1/b-html5-2.4.1/b-print-2.4.1/fh-3.4.0/r-2.5.0/datatables.min.js"></script>
+    <title>{{ page.title }}</title>
+
+</head>
+
+<body>
+    <section id="simple-grid-page">
+        {{ macros.render_header(page.header, page.subheader, patmsg) }}
+        {{ macros.render_table(repos, metrics) }}
+    </section>
+</body>
+
+</html>
+
+<script>
+    new DataTable('#fair-table', { pageLength: 50, order: [[1, 'desc']]});
+</script>

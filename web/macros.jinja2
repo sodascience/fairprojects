@@ -1,0 +1,56 @@
+{% macro render_header(title, subtitle, patmsg) %}
+<header class="main-header">
+    <img src="img/logo.png" alt="logo" class="logo">
+    <main>
+        <h1>{{ title }}</h1>
+        {% if patmsg != None %}
+        <p> {{ patmsg }} <a href="https://github.com/settings/tokens?type=beta"> renew here </a> </p>
+        {% endif %}
+    </main>
+</header>
+{% endmacro %}
+
+{% macro render_table_row(repo, metrics) %}
+<tr>
+    <td><a href="{{repo.url}}" target="_blank">{{ repo.name }}</a></td>
+    <td>{{ repo.created.date().isoformat() }}</td>
+    {% if metrics.description %} <td class="severity-{{repo.description_check.1}}">{{repo.description_check.0}}</td> {% endif %}
+    {% if metrics.topics %}      <td class="severity-{{repo.topics_check.1}}">{{repo.topics_check.0}}</td>           {% endif %}
+    {% if metrics.license %}     <td class="severity-{{repo.license_check.1}}">{{repo.license_check.0}}</td>         {% endif %}
+    {% if metrics.updated %}     <td class="severity-{{repo.last_update_check.1}}">{{repo.last_update_check.0}}</td> {% endif %}
+    {% if metrics.readme %}      <td class="severity-{{repo.readme_check.1}}">{{repo.readme_check.0}}</td>           {% endif %}
+    {% if metrics.readability %} <td class="severity-{{repo.readability_check.1}}">{{repo.readability_check.0}}</td> {% endif %}
+    {% if metrics.sections %}    
+        {% for section in metrics.sections %}
+            <td class="severity-{{repo.readme_section_check(section).1}}">{{repo.readme_section_check(section).0}}</td>
+        {% endfor %}
+    {% endif %}
+</tr>
+{% endmacro %}
+
+{% macro render_table(repos, metrics) %}
+<table id="fair-table">
+    <thead>
+        <tr>
+            <th>Repository</th>
+            <th>Created</th>
+            {% if metrics.description %} <th>Description</th> {% endif %}
+            {% if metrics.topics %}      <th>Topics</th>      {% endif %}
+            {% if metrics.license %}     <th>License</th>     {% endif %}
+            {% if metrics.updated %}     <th>Last update</th> {% endif %}
+            {% if metrics.readme %}      <th>Readme</th>      {% endif %}
+            {% if metrics.readability %} <th>Readability</th> {% endif %}
+            {% if metrics.sections %}    
+                {% for section in metrics.sections %}
+                    <th>{{section}}</th>
+                {% endfor %}
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for repo in repos %}
+        {{ render_table_row(repo, metrics) }}
+        {% endfor %}
+    </tbody>
+</table>
+{% endmacro %}

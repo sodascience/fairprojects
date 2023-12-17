@@ -19,9 +19,7 @@ if GH_PAT:
     elif expiration.days < 30:
         PAT_MSG = f"PAT expiring in {expiration.days} days."
 else:
-    PAT_MSG = (
-        "Not using a personal access token, please create & add it to the repo's secrets:"
-    )
+    PAT_MSG = "Not using a personal access token, please create & add it to the repo's secrets:"
 
 
 # First, load the configuration file

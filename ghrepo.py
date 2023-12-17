@@ -10,6 +10,7 @@ import httpx
 Severity = Literal["ok", "low", "high"]
 Criteria = tuple[str, Severity]
 
+
 @dataclass
 class GitHubRepo:
     """Class that contains all relevant info about a GitHub repository"""
@@ -122,10 +123,12 @@ async def get_readme(full_name: str, token: str | None = None) -> str | None:
         readme_b64 = readme_response.json().get("content")
         return b64decode(readme_b64).decode()
 
+
 def compute_readability(readme_txt: str):
     """Compute readability from readme markdown text."""
     # TODO: strip markdown before computing readability
     return textstat.textstat.flesch_reading_ease(readme_txt)
+
 
 async def get_org_repos(org: str, token: str | None = None) -> list[GitHubRepo]:
     """Get all the public repos for an organisation."""

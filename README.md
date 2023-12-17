@@ -8,7 +8,7 @@
 We tried to make the setup as simple as possible:
 
 1. Fork the repo.
-2. [Create a personal access token (PAT)](https://github.com/settings/tokens?type=beta) and add it to the repository's secrets with the name `DASHBOARD_PAT`. The token only needs access to public repositories.
+2. [Create a personal access token (PAT)](https://github.com/settings/tokens?type=beta) and add it to the repository's secrets with the name `SODA_DASH_PAT`. The token only needs access to public repositories.
 3. Edit the configuration in [config.toml](./config.toml).
 4. Set up GitHub pages.
 5. Activate the GitHub action.

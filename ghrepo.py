@@ -26,6 +26,7 @@ class GitHubRepo:
     updated: datetime
     readme: str | None
     readability: float | None
+    cff: str | None
 
     @property
     def description_check(self) -> Criteria:
@@ -64,6 +65,13 @@ class GitHubRepo:
         if days < 730:
             return date_txt, "low"
         return date_txt, "high"
+    
+    @property
+    def cff_check(self) -> Criteria:
+        """Check that the repo has a cff file."""
+        if self.cff:
+            return "CFF available", "ok"
+        return "No CFF file", "high"
 
     @property
     def readme_check(self) -> Criteria:
@@ -96,9 +104,10 @@ class GitHubRepo:
         return f"{section} not available", "high"
 
     @classmethod
-    async def from_api_response(cls, response: dict):
+    async def from_api_response(cls, response: dict, token: str | None = None):
         """Construct a repository data class from a GitHub api response dictionary."""
-        readme_txt = await get_readme(response["full_name"])
+        readme_txt = await get_readme(response["full_name"], token=token)
+        cff_txt = await get_cff(response["full_name"], token=token)
         return cls(
             name=response["name"],
             owner=response["owner"]["login"],
@@ -108,6 +117,7 @@ class GitHubRepo:
             topics=response["topics"] if "topics" in response else None,
             license=response["license"]["name"] if response["license"] else None,
             updated=datetime.fromisoformat(response["updated_at"]),
+            cff=cff_txt,
             readme=readme_txt,
             readability=compute_readability(readme_txt) if readme_txt is not None else None,
         )
@@ -124,6 +134,19 @@ async def get_readme(full_name: str, token: str | None = None) -> str | None:
         readme_b64 = readme_response.json().get("content")
         return b64decode(readme_b64).decode()
 
+async def get_cff(full_name: str, token: str | None = None) -> str | None:
+    api_urls = [
+        f"https://api.github.com/repos/{full_name}/contents/CITATION.cff",
+        f"https://api.github.com/repos/{full_name}/contents/citation.cff"
+    ]
+    head = {"Authorization": f"Bearer {token}"} if token else {}
+    async with httpx.AsyncClient() as client:
+        for api_url in api_urls:
+            resp = await client.get(api_url, headers=head)
+            if resp.status_code == 200:
+                cff_b64 = resp.json().get("content")
+                return b64decode(cff_b64).decode()
+        return None
 
 def compute_readability(readme_txt: str):
     """Compute readability from readme markdown text."""
@@ -145,7 +168,7 @@ async def get_org_repos(org: str, token: str | None = None) -> list[GitHubRepo]:
                 page_repos = response.json()
                 if not page_repos:
                     break
-                repos += [await GitHubRepo.from_api_response(repo) for repo in page_repos]
+                repos += [await GitHubRepo.from_api_response(repo, token) for repo in page_repos]
                 page += 1
             else:
                 response.raise_for_status()

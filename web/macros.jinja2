@@ -19,6 +19,7 @@
     {% if metrics.topics %}      <td class="severity-{{repo.topics_check.1}}">{{repo.topics_check.0}}</td>           {% endif %}
     {% if metrics.license %}     <td class="severity-{{repo.license_check.1}}">{{repo.license_check.0}}</td>         {% endif %}
     {% if metrics.updated %}     <td class="severity-{{repo.last_update_check.1}}">{{repo.last_update_check.0}}</td> {% endif %}
+    {% if metrics.cff %}         <td class="severity-{{repo.cff_check.1}}">{{repo.cff_check.0}}</td> {% endif %}
     {% if metrics.readme %}      <td class="severity-{{repo.readme_check.1}}">{{repo.readme_check.0}}</td>           {% endif %}
     {% if metrics.readability %} <td class="severity-{{repo.readability_check.1}}">{{repo.readability_check.0}}</td> {% endif %}
     {% if metrics.sections %}    
@@ -39,6 +40,7 @@
             {% if metrics.topics %}      <th>Topics</th>      {% endif %}
             {% if metrics.license %}     <th>License</th>     {% endif %}
             {% if metrics.updated %}     <th>Last update</th> {% endif %}
+            {% if metrics.cff %}         <th>Citable</th>     {% endif %}
             {% if metrics.readme %}      <th>Readme</th>      {% endif %}
             {% if metrics.readability %} <th>Readability</th> {% endif %}
             {% if metrics.sections %}    

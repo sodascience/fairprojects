@@ -15,7 +15,7 @@ We tried to make the setup as simple as possible:
 
 ## Contributing & License
 
-This project was made by the [ODISSEI SoDa team](https://github.com/sodascience) based on earlier work by Utrecht University's [Centre for Digital Humanities](https://github.com/CentreForDigitalHumanities/), specifically the [fair-dash](https://github.com/CentreForDigitalHumanities/fair-dash) repo.
+This project was made by the [ODISSEI SoDa team](https://github.com/sodascience) based on earlier work by Utrecht University's [Centre for Digital Humanities](https://cdh.uu.nl/), specifically the [fair-dash](https://github.com/CentreForDigitalHumanities/fair-dash) repo.
 
 Feel free to edit, remix, and make your own, but please acknowledge both the SoDa team and the UU CDH!
 

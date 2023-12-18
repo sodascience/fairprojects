@@ -1,24 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;600&family=Open+Sans:wght@300;400&display=swap");
 
-
 body {
+    max-width: 80%;
+    margin: 0 auto;
     font-family: "Open Sans", sans-serif;
 }
 
-h1,
-h3,
-h5 {
-    font-family: "Fira Sans", serif;
+h1, h3, h5 {
+    font-family: "Fira Sans", sans-serif;
     font-weight: 600;
 }
 
-h2,
-h4,
-h6 {
-    font-family: "Fira Sans", serif;
+h2, h4, h6 {
+    font-family: "Fira Sans", sans-serif;
 }
 
-a {
+th {
+    font-family: "Fira Sans", sans-serif;
+}
+
+td > a {
     text-decoration: none;
     background: linear-gradient(to left, #FFCD00 50%, #000000 50%) right;
     transition: 0.2s ease-out;
@@ -29,11 +30,8 @@ a {
     border-bottom: 1px solid #000000;
 }
 
-a:hover {
+td > a:hover {
     background-position: left;
-}
-
-a:hover {
     color: #FFCD00;
 }
 
@@ -46,15 +44,12 @@ a:hover {
 
 .main-header img {
     height: 100px;
+    margin: 1rem 0;
+    
 }
 
 .main-header h1 {
     font-size: 2em;
-}
-
-body {
-    max-width: 80%;
-    margin: 0 auto;
 }
 
 table {
@@ -75,4 +70,13 @@ table {
 .severity-ok {
     background-color: #24A793;
     color: black;
+}
+
+footer > p {
+    text-align: center;
+    color: #888888;
+}
+
+footer > p > a {
+    color: #888888;
 }

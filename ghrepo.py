@@ -6,6 +6,7 @@ from typing import Literal
 from base64 import b64decode
 import textstat
 import httpx
+from unmarkdown import unmark
 
 Severity = Literal["ok", "low", "high"]
 Criteria = tuple[str, Severity]
@@ -126,8 +127,9 @@ async def get_readme(full_name: str, token: str | None = None) -> str | None:
 
 def compute_readability(readme_txt: str):
     """Compute readability from readme markdown text."""
-    # TODO: strip markdown before computing readability
-    return textstat.textstat.flesch_reading_ease(readme_txt)
+    # Strip markdown before computing readability.
+    readme_plain = unmark(readme_txt)
+    return textstat.textstat.flesch_reading_ease(readme_plain)
 
 
 async def get_org_repos(org: str, token: str | None = None) -> list[GitHubRepo]:

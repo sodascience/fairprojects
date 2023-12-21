@@ -1,11 +1,13 @@
 """Module containing GitHubRepo data class and functions to perform api calls"""
+import re
+from base64 import b64decode
 from dataclasses import dataclass
 from datetime import datetime
-import re
 from typing import Literal
-from base64 import b64decode
-import textstat
+
 import httpx
+import textstat # type: ignore
+
 from unmarkdown import unmark
 
 Severity = Literal["ok", "low", "high"]
@@ -65,7 +67,7 @@ class GitHubRepo:
         if days < 730:
             return date_txt, "low"
         return date_txt, "high"
-    
+
     @property
     def cff_check(self) -> Criteria:
         """Check that the repo has a cff file."""
@@ -85,9 +87,9 @@ class GitHubRepo:
         """Check that the readme is legible"""
         if not self.readme:
             return "No readme", "high"
-        if self.readability > 30:
+        if self.readability > 30:  # type: ignore
             return str(self.readability), "ok"
-        if self.readability > 20:
+        if self.readability > 20:  # type: ignore
             return str(self.readability), "low"
         return str(self.readability), "high"
 
@@ -134,10 +136,11 @@ async def get_readme(full_name: str, token: str | None = None) -> str | None:
         readme_b64 = readme_response.json().get("content")
         return b64decode(readme_b64).decode()
 
+
 async def get_cff(full_name: str, token: str | None = None) -> str | None:
     api_urls = [
         f"https://api.github.com/repos/{full_name}/contents/CITATION.cff",
-        f"https://api.github.com/repos/{full_name}/contents/citation.cff"
+        f"https://api.github.com/repos/{full_name}/contents/citation.cff",
     ]
     head = {"Authorization": f"Bearer {token}"} if token else {}
     async with httpx.AsyncClient() as client:
@@ -147,6 +150,7 @@ async def get_cff(full_name: str, token: str | None = None) -> str | None:
                 cff_b64 = resp.json().get("content")
                 return b64decode(cff_b64).decode()
         return None
+
 
 def compute_readability(readme_txt: str):
     """Compute readability from readme markdown text."""

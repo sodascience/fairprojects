@@ -1,10 +1,12 @@
 """Generate a static website from configuration file."""
+import asyncio
 import os
 from pathlib import Path
-import asyncio
+
 import toml
 from jinja2 import Environment, FileSystemLoader
-from ghrepo import get_org_repos, find_token_expiration
+
+from ghrepo import find_token_expiration, get_org_repos
 
 # First, load the github PAT
 GH_PAT = os.environ.get("GH_PAT")

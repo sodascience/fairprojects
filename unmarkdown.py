@@ -1,5 +1,6 @@
 """Module to convert markdown to plain text. Code based on https://stackoverflow.com/a/54923798"""
 from io import StringIO
+
 from markdown import Markdown
 
 
@@ -16,11 +17,11 @@ def unmark_element(element, stream=None):
     return stream.getvalue()
 
 
-Markdown.output_formats["plain"] = unmark_element
+Markdown.output_formats.update(plain=unmark_element)
 
 
-def unmark(text):
+def unmark(text: str) -> str:
     """Convert markdown-formatted text to plain text."""
-    md = Markdown(output_format="plain")
+    md = Markdown(output_format="plain")  # type: ignore
     md.stripTopLevelTags = False
     return md.convert(text)

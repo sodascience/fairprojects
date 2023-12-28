@@ -1,5 +1,5 @@
 # FAIR projects dashboard
-[![](https://img.shields.io/badge/pages-dashboard-steelblue?link=https://fair.odissei-soda.nl&logo=GitHub)](fair.odissei-soda.nl)
+[![](https://img.shields.io/badge/pages-dashboard-steelblue?link=https://fair.odissei-soda.nl&logo=GitHub)](https://fair.odissei-soda.nl)
 
 🪶 A lightweight dashboard to track the [FAIRness](https://fair-software.eu) of an organization's projects on GitHub
 

@@ -13,5 +13,5 @@ updated      = true  # Display the last update
 cff          = false # Check that the repo is citable with cff file
 readme       = true  # Check that the repo has a readme
 readability  = true  # Display the readability score for the readme
-sections     = ["Contact", "Contributing"] # Check that these sections are in readme
+sections     = ["Contact"] # Check that these sections are in readme
 

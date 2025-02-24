@@ -1,4 +1,5 @@
 """Module to convert markdown to plain text. Code based on https://stackoverflow.com/a/54923798"""
+
 from io import StringIO
 
 from markdown import Markdown

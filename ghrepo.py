@@ -1,4 +1,5 @@
 """Module containing GitHubRepo data class and functions to perform api calls"""
+
 import re
 from base64 import b64decode
 from dataclasses import dataclass
@@ -6,7 +7,7 @@ from datetime import datetime
 from typing import Literal
 
 import httpx
-import textstat # type: ignore
+import textstat  # type: ignore
 
 from unmarkdown import unmark
 

@@ -1,4 +1,5 @@
 """Generate a static website from configuration file."""
+
 import asyncio
 import os
 from pathlib import Path

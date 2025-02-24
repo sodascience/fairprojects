@@ -1,18 +1,22 @@
-[tool.poetry]
+[project]
 name = "fairprojects"
 version = "0.1.0"
 description = "Dashboard for tracking your organization's repo"
-authors = ["Erik-Jan van Kesteren <erikjanvankesteren@pm.me>", "Donatas Rasiukevičius <donatas@rasiukevicius.dev>"]
+authors = [
+    { name = "Erik-Jan van Kesteren", email = "erikjanvankesteren@pm.me" },
+    { name = "Donatas Rasiukevičius", email = "donatas@rasiukevicius.dev" },
+]
 readme = "readme.md"
-package-mode = false
+requires-python = ">=3.10"
 
-[tool.poetry.dependencies]
-python = "^3.10"
-httpx = "^0.24.1"
-jinja2 = "^3.1.2"
-toml = "^0.10.2"
-textstat = "^0.7.3"
-markdown = "^3.5.1"
+dependencies = [
+    "httpx>=0.24.1",
+    "jinja2>=3.1.2",
+    "toml>=0.10.2",
+    "textstat>=0.7.3",
+    "markdown>=3.5.1",
+]
+
 
 [tool.ruff]
 line-length = 100
@@ -20,7 +24,3 @@ line-length = 100
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F"]
 ignore = []
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
